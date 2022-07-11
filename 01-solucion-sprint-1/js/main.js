@@ -80,7 +80,7 @@ function handleClickNewCatForm(event) {
     }
 }
 //Adicionar nuevo gatito
-function addNewKitten(event) {
+/*function addNewKitten(event) {
     event.preventDefault();
     const valueDesc = inputDesc.value;
     const valuePhoto = inputPhoto.value;
@@ -92,15 +92,15 @@ function addNewKitten(event) {
             labelMesageError.innerHTML = "";
         }
     }
-}
+}*/
 //Cancelar la búsqueda de un gatito
-function cancelNewKitten(event) {
+/*function cancelNewKitten(event) {
     event.preventDefault();
     newFormElement.classList.add("collapsed");
     inputDesc.value = "";
     inputPhoto.value = "";
     inputName.value = "";
-}
+}*/
 
 //Filtrar por descripción
 function filterKitten(event) {
@@ -120,11 +120,54 @@ renderKittenList(kittenDataList);
 //Eventos
 linkNewFormElememt.addEventListener("click", handleClickNewCatForm);
 searchButton.addEventListener("click", filterKitten);
+
+
+
+
+
+
+//Aquí empezamos nosotras el segundo sprint :)
+
+//Añadir un Michi y que se quede en el array
+
+const inputRace = document.querySelector('.js-input-race');
+
+function addNewKitten(event) {
+    event.preventDefault();
+    const newKittenDataObject = {
+        image: inputPhoto.value,
+        name: inputName.value,
+        desc: inputDesc.value,
+        race: inputRace.value,
+      };
+    const valueDesc = inputDesc.value;
+    const valuePhoto = inputPhoto.value;
+    const valueName = inputName.value;
+    if (valueDesc === "" && valuePhoto === "" && valueName === "") {
+        labelMesageError.innerHTML = "Debe rellenar todos los valores";
+    } else {
+        if (valueDesc !== "" && valuePhoto !== "" && valueName !== "") {
+            labelMesageError.innerHTML = "¡Mola! ¡Un nuevo gatito en Adalab!";
+            kittenDataList.push(newKittenDataObject); //después d comprobación
+        }
+    }
+ listElement.innerHTML += renderKitten(newKittenDataObject);
+};
+
 buttonAdd.addEventListener("click", addNewKitten);
+//funciona!
+
+//limpiar inputs y cancelar
+
+function cancelNewKitten(event) {
+    event.preventDefault();
+    newFormElement.classList.add("collapsed");
+    inputDesc.value = "";
+    inputPhoto.value = "";
+    inputName.value = "";
+    inputRace.value = "";
+    labelMesageError.innerHTML = "";
+};
+
 buttonCancelForm.addEventListener("click", cancelNewKitten);
-
-
-
-
-
 
