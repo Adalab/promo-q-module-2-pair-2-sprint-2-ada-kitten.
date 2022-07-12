@@ -32,7 +32,10 @@ const kittenData_3 = {
     desc: "Ruiseño, juguetón, le guta estar tranquilo y que nadie le moleste. Es una maravilla acariciarle!",
     race: "British Shorthair",
 };
-const kittenDataList = [kittenData_1, kittenData_2, kittenData_3];
+//const kittenDataList = [kittenData_1, kittenData_2, kittenData_3];
+
+const kittenDataList = [];
+
 //Funciones
 function renderKitten(kittenData) {
     const kitten = `<li class="card">
@@ -154,14 +157,34 @@ buttonCancelForm.addEventListener("click", cancelNewKitten);
 function filterKitten(ev) {
     ev.preventDefault();
 
-    console.log(InputRaceSearch);
-    console.log(InputRaceSearch.value);
+    //Para juntar dos filtros se hace simplemente añadiendo un .filter después del último valor como en el ejemplo de abajo
 
-    const kittenItem = kittenDataList.filter (({race}) => race===InputRaceSearch.value);
-    console.log(kittenItem);
-    renderKittenList(kittenItem);
+    const kittenListFiltered = kittenDataList.filter (({race}) => race.includes(InputRaceSearch.value)).filter (({desc}) => desc.includes(input_search_desc.value));
+
+    console.log(kittenListFiltered);
+
+    renderKittenList(kittenListFiltered);
+    // const kittenItem = kittenDataList.filter (({race}) => race===InputRaceSearch.value);
+    // console.log(kittenItem);
+    // renderKittenList(kittenItem);
     
     }
 
     searchButton.addEventListener("click", filterKitten);
    
+   
+
+
+    //EJERCICIO 2.13
+
+const GITHUB_USER = 'NereidaRO';
+const SERVER_URL = `https://adalab-api.herokuapp.com/api/kittens/${GITHUB_USER}`;
+
+
+
+fetch(SERVER_URL, {
+    method: 'GET',
+    headers: {'Content-Type': 'application/json'},
+  }).then((response) => response.json()).then((data) => (kittenDataList.push(data.result)));
+
+  renderKittenList(kittenDataList);
