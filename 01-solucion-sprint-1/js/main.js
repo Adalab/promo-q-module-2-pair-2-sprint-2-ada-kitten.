@@ -32,14 +32,17 @@ const kittenData_3 = {
     desc: "Ruiseño, juguetón, le guta estar tranquilo y que nadie le moleste. Es una maravilla acariciarle!",
     race: "British Shorthair",
 };
-const kittenDataList = [kittenData_1, kittenData_2, kittenData_3];
+//const kittenDataList = [kittenData_1, kittenData_2, kittenData_3];
+
+let kittenDataList = [];
+
 //Funciones
 function renderKitten(kittenData) {
     const kitten = `<li class="card">
     <article>
       <img
         class="card_img"
-        src=${kittenData.image}
+        src=${kittenData.url}
         alt="gatito"
       />
       <h3 class="card_title">${kittenData.name}</h3>
@@ -154,16 +157,56 @@ buttonCancelForm.addEventListener("click", cancelNewKitten);
 function filterKitten(ev) {
     ev.preventDefault();
 
-    console.log(InputRaceSearch);
-    console.log(InputRaceSearch.value);
+    //Para juntar dos filtros se hace simplemente añadiendo un .filter después del último valor como en el ejemplo de abajo
 
-    const kittenListFiltered = kittenDataList;
+    const kittenListFiltered = kittenDataList.filter (({race}) => race.includes(InputRaceSearch.value)).filter (({desc}) => desc.includes(input_search_desc.value));
 
-    const kittenItem = kittenDataList.filter (({race}) => race===InputRaceSearch.value);
-    console.log(kittenItem);
-    renderKittenList(kittenItem);
+    console.log(kittenListFiltered);
+
+    renderKittenList(kittenListFiltered);
+    // const kittenItem = kittenDataList.filter (({race}) => race===InputRaceSearch.value);
+    // console.log(kittenItem);
+    // renderKittenList(kittenItem);
     
     }
 
     searchButton.addEventListener("click", filterKitten);
    
+   
+
+
+    //EJERCICIO 2.13
+
+const GITHUB_USER = 'NereidaRO';
+const SERVER_URL = `https://adalab-api.herokuapp.com/api/kittens/${GITHUB_USER}`;
+
+
+//lo del fetch va a un else
+
+
+//kittenDataList está en linea 37
+//en renderKitten() hemos cambiado image por url porque es como viene en la API
+
+//Día 2.14
+
+const kittenListStored = JSON.parse(localStorage.getItem('kittensList')); //si hay gatos de otra sesión?
+
+function askForCats () {
+    if (kittenListStored){
+        renderKittenList(kittenListStored)
+    } else {
+        fetch(SERVER_URL, {
+            method: 'GET',
+            headers: {'Content-Type': 'application/json'},
+          }).then((response) => response.json()) //esto ya los convierte, no JSON.parse es necesario
+          .then((data) => {
+            let serverData = data.results;
+            console.log(data);
+             kittenDataList = serverData;
+             renderKittenList(kittenDataList); 
+             //localStorage.setItem("kittensList", JSON.stringify(kittenDataList)); ESTO PETA NO SE VEN GATOS
+            });
+    };
+};
+
+askForCats();
