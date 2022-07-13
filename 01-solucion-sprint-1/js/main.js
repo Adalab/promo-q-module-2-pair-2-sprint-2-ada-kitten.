@@ -157,6 +157,8 @@ function filterKitten(ev) {
     console.log(InputRaceSearch);
     console.log(InputRaceSearch.value);
 
+    const kittenListFiltered = kittenDataList;
+
     const kittenItem = kittenDataList.filter (({race}) => race===InputRaceSearch.value);
     console.log(kittenItem);
     renderKittenList(kittenItem);
