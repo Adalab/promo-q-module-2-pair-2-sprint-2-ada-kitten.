@@ -205,7 +205,7 @@ function askForCats () {
              kittenDataList = serverData;
 
              renderKittenList(kittenDataList); 
-             //localStorage.setItem("kittensList", JSON.stringify(kittenDataList)); ESTO PETA NO SE VEN GATOS
+             localStorage.setItem("kittensList", JSON.stringify(kittenDataList));
             });
     };
 };
