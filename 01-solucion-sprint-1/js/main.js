@@ -42,7 +42,7 @@ function renderKitten(kittenData) {
     <article>
       <img
         class="card_img"
-        src=${kittenData.url}
+        src=${kittenData.image}
         alt="gatito"
       />
       <h3 class="card_title">${kittenData.name}</h3>
@@ -202,11 +202,14 @@ function askForCats () {
           .then((data) => {
             let serverData = data.results;
             console.log(data);
-             kittenDataList = serverData;
-             renderKittenList(kittenDataList); 
-             //localStorage.setItem("kittensList", JSON.stringify(kittenDataList)); ESTO PETA NO SE VEN GATOS
-            });
+            kittenDataList = serverData;
+            renderKittenList(kittenDataList); 
+            localStorage.setItem("kittensList", JSON.stringify(kittenDataList));
+            }); //hoy funciona ¬¬
     };
 };
 
 askForCats();
+
+//Día 2.15
+//Cambiar renderkittendata para que sea con DOM avanzado.
