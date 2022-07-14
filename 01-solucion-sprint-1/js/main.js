@@ -36,8 +36,41 @@ const kittenData_3 = {
 
 let kittenDataList = [];
 
-//Funciones
 function renderKitten(kittenData) {
+    const liElement = document.createElement('li');
+    liElement.classList.add('card');
+    const articleElement = document.createElement('article');
+    liElement.appendChild(articleElement);
+
+    const imageElement = document.createElement('img');
+    imageElement.classList.add('card_image');
+    imageElement.setAttribute("scr", kittenData.image);
+    imageElement.setAttribute("alt", "gatito");
+    articleElement.appendChild(imageElement);
+
+    const nameElement = document.createElement('h3');
+    nameElement.classList.add('card_title');
+    const nameText = document.createTextNode(kittenData.name);
+    nameElement.appendChild(nameText);
+    articleElement.appendChild(nameElement);
+
+    const raceElement = document.createElement('h3');
+    raceElement.classList.add('card_race');
+    const raceText = document.createTextNode(kittenData.race);
+    raceElement.appendChild(raceText);
+    articleElement.appendChild(raceElement);
+
+    const descElement = document.createElement('p');
+    descElement.classList.add('card_description');
+    const descText = document.createTextNode(kittenData.desc);
+    descElement.appendChild(descText);
+    articleElement.appendChild(descElement);
+
+    return kitten;
+  };
+
+//Funciones
+/*function renderKitten(kittenData) {
     const kitten = `<li class="card">
     <article>
       <img
@@ -53,7 +86,7 @@ function renderKitten(kittenData) {
     </article>
     </li>`;
     return kitten;
-}
+}*/
 function renderKittenList(kittenDataList) {
     listElement.innerHTML = "";
     for (const kittenItem of kittenDataList) {
@@ -211,3 +244,9 @@ function askForCats () {
 };
 
 askForCats();
+
+//Día 2.15
+//Cambiar renderkittendata para que sea con DOM avanzado.
+
+//no funciona, mañana preguntar
+//ni el localStorage.setItem ni lo del DOM (linea 40)
