@@ -39,12 +39,13 @@ let kittenDataList = [];
 function renderKitten(kittenData) {
     const liElement = document.createElement('li');
     liElement.classList.add('card');
+    listElement.appendChild(liElement);
     const articleElement = document.createElement('article');
     liElement.appendChild(articleElement);
 
     const imageElement = document.createElement('img');
     imageElement.classList.add('card_image');
-    imageElement.setAttribute("scr", kittenData.image);
+    imageElement.setAttribute("src", kittenData.image);
     imageElement.setAttribute("alt", "gatito");
     articleElement.appendChild(imageElement);
 
@@ -66,7 +67,6 @@ function renderKitten(kittenData) {
     descElement.appendChild(descText);
     articleElement.appendChild(descElement);
 
-    return kitten;
   };
 
 //Funciones
@@ -88,9 +88,8 @@ function renderKitten(kittenData) {
     return kitten;
 }*/
 function renderKittenList(kittenDataList) {
-    listElement.innerHTML = "";
     for (const kittenItem of kittenDataList) {
-        listElement.innerHTML += renderKitten(kittenItem);
+     renderKitten(kittenItem);
     }
 }
 //Mostrar/ocultar el formulario
